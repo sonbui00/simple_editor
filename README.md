@@ -3,8 +3,8 @@ Clone git and run command
 ```
 $ npm install
 ```
-## Run server
+## Run dev server
 ```
-$ npm run server
+$ npm start
 ```
-And open [localhost:8080](localhost:8080)
+And open [localhost:8080](http://localhost:8080)
