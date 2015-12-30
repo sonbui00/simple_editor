@@ -1,3 +1,4 @@
+require("bootstrap-webpack");
 require('./css/style.css');
 function init() {
   //// Initialize Firebase.
