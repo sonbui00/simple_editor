@@ -1,0 +1,23 @@
+{
+  "name": "simple_editor",
+  "version": "1.0.0",
+  "description": "Simple editor with firebase and firepad",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sonbui00/simple_editor.git"
+  },
+  "author": "Son Bui <sonbv00@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sonbui00/simple_editor/issues"
+  },
+  "homepage": "https://github.com/sonbui00/simple_editor#readme",
+  "dependencies": {
+    "http-server": "^0.8.5"
+  }
+}
