@@ -7,6 +7,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
+      { test: /\.json$/, loader: "json-loader" },
       // Bootstrap
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-webpack has access to the jQuery object
@@ -19,5 +20,9 @@ module.exports = {
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: "file" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&mimetype=image/svg+xml" }
     ]
+  },
+  node: {
+    fs: "empty",
+    child_process: 'empty'
   }
 }
