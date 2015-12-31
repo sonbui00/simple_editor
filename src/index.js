@@ -1,6 +1,6 @@
 require('expose?$!expose?jQuery!jquery');
 require("bootstrap-webpack");
-require('./css/sidebar.css');
+require('./css/sidebar.less');
 require('./css/style.css');
 var Firebase = require('firebase');
 var Firepad  = require('firepad');

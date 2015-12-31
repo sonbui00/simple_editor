@@ -8,6 +8,7 @@ module.exports = {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
       { test: /\.json$/, loader: "json-loader" },
+      { test: /\.less$/, loader: "style!css!less" },
       // Bootstrap
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-webpack has access to the jQuery object
