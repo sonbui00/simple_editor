@@ -31,6 +31,7 @@
     "json-loader": "^0.5.4",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
+    "simplewebrtc": "^2.1.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"

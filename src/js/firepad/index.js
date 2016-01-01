@@ -11,7 +11,7 @@ var _Firepad = function (ref, place) {
     this.ref = ref.child(hash);
   } else {
     this.ref = ref.push(); // generate unique location.
-    window.location = window.location + '#' + ref.key(); // add it as a hash to the URL.
+    window.location = window.location + '#' + this.ref.key(); // add it as a hash to the URL.
   }
 
   var codeMirror = CodeMirror(place);
