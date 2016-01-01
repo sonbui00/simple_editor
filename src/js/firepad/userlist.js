@@ -44,15 +44,14 @@ FirepadUserList.prototype.makeUserList_ = function() {
 };
 
 FirepadUserList.prototype.makeHeading_ = function() {
-  var counterSpan = elt('span', '0');
+  var counterSpan = elt('span', '0', { 'class': 'badge sub_icon' });
   this.firebaseOn_(this.ref_, 'value', function(usersSnapshot) {
     setTextContent(counterSpan, "" + usersSnapshot.numChildren());
   });
 
   return elt('div', [
-    elt('span', 'ONLINE ('),
+    elt('span', 'Online'),
     counterSpan,
-    elt('span', ')')
   ], { 'class': 'firepad-userlist-heading' });
 };
 

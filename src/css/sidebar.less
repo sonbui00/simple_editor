@@ -38,7 +38,7 @@
   }
 }
 
-#sidebar .item, #menu-toggle, .sidebar-nav li a {
+#sidebar .item, .firepad-userlist-heading, #menu-toggle, .sidebar-nav li a {
   color: #999;
   display: block;
   float: left;
@@ -60,7 +60,7 @@
   opacity: .7;
 }
 
-.sidebar-nav li {
+.sidebar-nav li, .firepad-userlist-heading {
   line-height: 40px;
   text-indent: 20px;
 }
@@ -103,11 +103,11 @@
   padding-right: 30px;
   padding-top:20px;
 }
-.sub_icon
-{
+.sub_icon {
   float:right;
-  padding-right: 30px;
-  padding-top:10px;
+  margin-right: 30px;
+  margin-top:10px;
+  text-indent: 0;
 }
 .content-header {
   height: 65px;
@@ -136,5 +136,12 @@
     left: @sidebarWidth;
     width: @sidebarWidth;
     transition: all .4s ease 0s;
+  }
+}
+
+#videos {
+  video {
+    width: @sidebarWidth;
+    padding: 5px;
   }
 }
