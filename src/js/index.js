@@ -38,7 +38,11 @@ $("#video-chat").click(function(e) {
     // the id/element dom element that will hold remote videos
     remoteVideosEl: 'remoteVideos',
     // immediately ask for camera access
-    autoRequestMedia: true
+    autoRequestMedia: true,
+    // force new connect
+    socketio: {
+      forceNew: true
+    }
   });
   // we have to wait until it's ready
   webrtc.on('readyToCall', function () {

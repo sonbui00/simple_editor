@@ -39,8 +39,8 @@ FirepadUserList.prototype.makeUserList_ = function() {
     elt('div', [
       this.makeUserEntryForSelf_(),
       this.makeUserEntriesForOthers_()
-    ], {'class': 'firepad-userlist-users' })
-  ], {'class': 'firepad-userlist' });
+    ], {'class': 'firepad-userlist-users collapse' })
+  ], {'class': 'firepad-userlist'});
 };
 
 FirepadUserList.prototype.makeHeading_ = function() {
@@ -52,7 +52,7 @@ FirepadUserList.prototype.makeHeading_ = function() {
   return elt('div', [
     elt('span', 'Online'),
     counterSpan,
-  ], { 'class': 'firepad-userlist-heading' });
+  ], { 'class': 'firepad-userlist-heading', 'data-toggle': 'collapse', 'data-target': '.firepad-userlist-users' });
 };
 
 FirepadUserList.prototype.makeUserEntryForSelf_ = function() {
