@@ -14,21 +14,19 @@ var _Firepad = function (ref, place) {
     window.location = window.location + '#' + this.ref.key(); // add it as a hash to the URL.
   }
 
-  var codeMirror = CodeMirror(place);
-  //// Create Ace
-  // var aceEditor = ace.edit('firepad-container');
-  //// Create Firepad (with rich text toolbar and shortcuts enabled).
-  var firepad = Firepad.fromCodeMirror(this.ref, codeMirror,
-      { richTextToolbar: true, richTextShortcuts: true });
-  //// Initialize contents.
-  firepad.on('ready', function() {
-    if (firepad.isHistoryEmpty()) {
-      firepad.setHtml('<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/><br/>Collaborative-editing made easy.\n');
-    }
+  // Create Ace
+  var aceEditor = ace.edit('firepad-container');
+  aceEditor.setTheme("ace/theme/textmate");
+  var session = aceEditor.getSession();
+  session.setUseWrapMode(true);
+  session.setUseWorker(false);
+  session.setMode("ace/mode/javascript");
+
+  var firepad = Firepad.fromACE(this.ref, aceEditor, {
+    defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
   });
 
   this.intance = firepad;
-
 }
 
 _Firepad.init = _Firepad;
