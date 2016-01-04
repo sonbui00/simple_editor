@@ -1,4 +1,5 @@
-var Firepad  = require('firepad');
+var Firepad  = require('./override');
+var FirepadUserList = require('./userlist')
 
 var _Firepad = function (ref, place) {
   if (!(this instanceof _Firepad)) {
@@ -22,11 +23,18 @@ var _Firepad = function (ref, place) {
   session.setUseWorker(false);
   session.setMode("ace/mode/javascript");
 
-  var firepad = Firepad.fromACE(this.ref, aceEditor, {
+  firepad = Firepad.fromACE(this.ref, aceEditor, {
     defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
   });
 
   this.intance = firepad;
+
+  // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+  var userId = this.intance.firebaseAdapter_.userId_;
+
+  //// Create FirepadUserList (with our desired userId).
+  this.userList = FirepadUserList.fromDiv(this.ref.child('users'),
+                                            document.getElementById('userlist'), userId);
 }
 
 _Firepad.init = _Firepad;

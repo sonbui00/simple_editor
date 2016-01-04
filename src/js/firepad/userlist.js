@@ -7,6 +7,7 @@ var FirepadUserList = function (ref, place, userId, displayName) {
   this.userId_ = userId;
   this.place_ = place;
   this.firebaseCallbacks_ = [];
+  this.listUserName = {};
 
   var self = this;
   this.hasName_ = !!displayName;
@@ -25,6 +26,10 @@ var FirepadUserList = function (ref, place, userId, displayName) {
 
 // This is the primary "constructor" for symmetry with Firepad.
 FirepadUserList.fromDiv = FirepadUserList;
+
+FirepadUserList.prototype.getUserName = function(userId) {
+  return this.listUserName[userId];
+}
 
 FirepadUserList.prototype.dispose = function() {
   this.removeFirebaseCallbacks_();
@@ -106,6 +111,8 @@ FirepadUserList.prototype.makeUserEntriesForOthers_ = function() {
     var name = userSnapshot.child('name').val();
     if (typeof name !== 'string') { name = 'Guest'; }
     name = name.substring(0, 20);
+
+    self.listUserName[userId] = name;
 
     var color = userSnapshot.child('color').val();
     if (!isValidColor(color)) {
