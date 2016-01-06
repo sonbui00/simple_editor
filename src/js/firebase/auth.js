@@ -1,6 +1,10 @@
+var EventEmitter = require('events').EventEmitter;
+var util         = require('util');
+
 var providers = ['github', 'facebook']
 
 var Auth = function (ref) {
+  var self = this;
   this.ref = ref;
 
   this.onAuth(function (authData) {
@@ -10,13 +14,24 @@ var Auth = function (ref) {
           ref.child("users").child(authData.uid).set({
             provider: authData.provider,
             name: getName(authData)
+          }, function (error) {
+            if (!error) {
+              self.userName = getName(authData);
+            }
           });
+        } else {
+          self.userName = dataSnapshot.child("name").val();
         }
+        self.userId = authData.uid;
+        self.emit('login success', self);
       });
+    } else {
+
     }
   });
-
 }
+
+util.inherits(Auth, EventEmitter);
 
 Auth.prototype.auth = function (provider, callback) {
   return this.ref.authWithOAuthPopup(provider, callback);
@@ -35,11 +50,7 @@ Auth.prototype.onAuth = function(callback) {
 }
 
 Auth.prototype.onLoginSuccess = function(callback) {
-  this.ref.onAuth(function (authData) {
-    if (authData) {
-      callback(authData);
-    }
-  })
+  this.on('login success', callback);
 }
 
 Auth.prototype.onLogoutSuccess = function(callback) {

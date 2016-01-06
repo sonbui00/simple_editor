@@ -42,7 +42,6 @@ FirepadUserList.prototype.makeUserList_ = function() {
   return elt('div', [
     this.makeHeading_(),
     elt('div', [
-      this.makeUserEntryForSelf_(),
       this.makeUserEntriesForOthers_()
     ], {'class': 'firepad-userlist-users collapse' })
   ], {'class': 'firepad-userlist'});
@@ -58,42 +57,6 @@ FirepadUserList.prototype.makeHeading_ = function() {
     elt('span', 'Online'),
     counterSpan,
   ], { 'class': 'firepad-userlist-heading', 'data-toggle': 'collapse', 'data-target': '.firepad-userlist-users' });
-};
-
-FirepadUserList.prototype.makeUserEntryForSelf_ = function() {
-  var myUserRef = this.ref_.child(this.userId_);
-
-  var colorDiv = elt('div', null, { 'class': 'firepad-userlist-color-indicator' });
-  this.firebaseOn_(myUserRef.child('color'), 'value', function(colorSnapshot) {
-    var color = colorSnapshot.val();
-    if (isValidColor(color)) {
-      colorDiv.style.backgroundColor = color;
-    }
-  });
-
-  var nameInput = elt('input', null, { type: 'text', 'class': 'firepad-userlist-name-input'} );
-  nameInput.value = this.displayName_;
-
-  var nameHint = elt('div', 'ENTER YOUR NAME', { 'class': 'firepad-userlist-name-hint'} );
-  if (this.hasName_) nameHint.style.display = 'none';
-
-  // Update Firebase when name changes.
-  var self = this;
-  on(nameInput, 'change', function(e) {
-    var name = nameInput.value || "Guest " + Math.floor(Math.random() * 1000);
-    myUserRef.child('name').onDisconnect().remove();
-    myUserRef.child('name').set(name);
-    nameHint.style.display = 'none';
-    nameInput.blur();
-    self.displayName_ = name;
-    stopEvent(e);
-  });
-
-  var nameDiv = elt('div', [nameInput, nameHint]);
-
-  return elt('div', [ colorDiv, nameDiv ], {
-    'class': 'firepad-userlist-user ' + 'firepad-user-' + this.userId_
-  });
 };
 
 FirepadUserList.prototype.makeUserEntriesForOthers_ = function() {
@@ -130,9 +93,7 @@ FirepadUserList.prototype.makeUserEntriesForOthers_ = function() {
     userId2Element[userId] = userDiv;
 
     if (userId === self.userId_) {
-      // HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
-      // But don't show it.
-      userDiv.style.display = 'none';
+      // style current user here in here
     }
 
     var nextElement =  prevChildName ? userId2Element[prevChildName].nextSibling : userList.firstChild;

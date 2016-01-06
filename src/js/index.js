@@ -3,8 +3,8 @@ var Firebase = require('./firebase')
 
 var auth = Firebase.getAuth();
 
-auth.onLoginSuccess(function(authData) {
-  firepad = Firepad.init(Firebase.getRef(), document.getElementById('firepad-container'));
+auth.onLoginSuccess(function(auth) {
+  firepad = Firepad.init(Firebase.getRef(), document.getElementById('firepad-container'), auth.userId, auth.userName);
   $('#sidebar .item.user .text').text('User');
   $('#login-layer').hide();
   $('#logout-layer').show();
