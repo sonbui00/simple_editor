@@ -1,44 +1,34 @@
 var Firepad  = require('./firepad');
 var Firebase = require('./firebase')
 
-var authRef = Firebase.getRef();
+var auth = Firebase.getAuth();
 
-$('#logout-layer').hide();
-
-authRef.onAuth(function (authData) {
-  if (authData) {
-    authRef.child("users").child(authData.uid).once('value', function (dataSnapshot) {
-      if (!dataSnapshot.child("name").exists()) {
-        authRef.child("users").child(authData.uid).set({
-          provider: authData.provider,
-          name: authData.github.displayName || authData.github.username
-        });
-      }
-    });
-    firepad = Firepad.init(Firebase.getRef(), document.getElementById('firepad-container'));
-    $('#sidebar .item.user .text').text('User');
-    $('#login-layer').hide();
-    $('#logout-layer').show();
-  } else {
-    $('#sidebar .item.user .text').text('Login');
-    $('#login-layer').show();
-    $('#logout-layer').hide();
-    $('#firepad-container').replaceWith('<div id="firepad-container"></div>');
-    $('#userlist').html('');
-  }
+auth.onLoginSuccess(function(authData) {
+  firepad = Firepad.init(Firebase.getRef(), document.getElementById('firepad-container'));
+  $('#sidebar .item.user .text').text('User');
+  $('#login-layer').hide();
+  $('#logout-layer').show();
 });
 
-$('.login.github').click(function () {
-  authRef.authWithOAuthPopup('github', function (error, data) {
-    if (error) {
+auth.onLogoutSuccess(function(authData) {
+  $('#sidebar .item.user .text').text('Login');
+  $('#login-layer').show();
+  $('#logout-layer').hide();
+  $('#firepad-container').replaceWith('<div id="firepad-container"></div>');
+  $('#userlist').html('');
+});
 
-      return;
-    }
+auth.getProviders().forEach(function (provider) {
+  $('.login.' + provider).click(function() {
+    auth.auth(provider, function (error, data) {
+      if (error) {
+      }
+    });
   });
 });
 
-$('.logout.github').click(function () {
-  authRef.unauth();
+$('#logout').click(function () {
+  auth.unauth();
 });
 
 $("#menu-toggle").click(function(e) {
