@@ -1,0 +1,10 @@
+{
+  "firebase": "editor-code4startup",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "webpack.config.js",
+    "**/src/**",
+    "**/node_modules/**"
+  ]
+}
