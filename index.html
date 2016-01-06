@@ -22,7 +22,7 @@
         <li class="sidebar-brand"><span id="menu-toggle" href="#">Editor<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></span></li>
       </ul>
       <ul class="sidebar-nav" id="sidebar">
-        <li class="item user" data-toggle="modal" data-target="#myModal"><span class="text">Login</span><span class="sub_icon glyphicon glyphicon-user
+        <li class="item user" data-toggle="modal" data-target="#user-modal"><span class="text">Login</span><span class="sub_icon glyphicon glyphicon-user
 "></span></li>
         <li class="item play" id="video-chat">Video chat<span class="sub_icon glyphicon glyphicon-play-circle"></span></li>
       </ul>
@@ -37,19 +37,21 @@
 
   </div>
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title" id="myModalLabel">User</h4>
         </div>
         <div class="modal-body">
-          <div id="login-layer">
-            <button class="login github">Log in with GitHub</button>
-            <button class="login facebook">Log in with Facebook</button>
+          <div id="login-layer" class="text-center">
+            <button class="login github btn btn-primary">Log in with GitHub</button>
+            <button class="login facebook btn btn-info">Log in with Facebook</button>
           </div>
-          <div id="logout-layer" style="display: none;"><button id="logout" >Logout</button></div>
+          <div id="logout-layer" style="display: none;" class="text-center">
+            <button id="logout" class="btn btn-primary">Logout</button>
+          </div>
         </div>
       </div>
     </div>

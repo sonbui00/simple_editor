@@ -82,19 +82,23 @@ FirepadUserList.prototype.makeUserEntriesForOthers_ = function() {
       color = "#ffb"
     }
 
+    var nameDiv = elt('span', name || 'Guest', { 'class': 'firepad-userlist-name' });
+
     var colorDiv = elt('div', null, { 'class': 'firepad-userlist-color-indicator' });
-    colorDiv.style.backgroundColor = color;
+    if (userId !== self.userId_) {
+      colorDiv.style.backgroundColor = color;
+    }
 
-    var nameDiv = elt('div', name || 'Guest', { 'class': 'firepad-userlist-name' });
-
-    var userDiv = elt('div', [ colorDiv, nameDiv ], {
+    var userDiv = elt('div', [ nameDiv, colorDiv ], {
       'class': 'firepad-userlist-user ' + 'firepad-user-' + userId
     });
-    userId2Element[userId] = userDiv;
 
     if (userId === self.userId_) {
-      // style current user here in here
+      userDiv.style.backgroundColor = '#444';
     }
+
+    userId2Element[userId] = userDiv;
+
 
     var nextElement =  prevChildName ? userId2Element[prevChildName].nextSibling : userList.firstChild;
     userList.insertBefore(userDiv, nextElement);

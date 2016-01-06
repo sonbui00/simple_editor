@@ -6,12 +6,14 @@ var auth = Firebase.getAuth();
 auth.onLoginSuccess(function(auth) {
   firepad = Firepad.init(Firebase.getRef(), document.getElementById('firepad-container'), auth.userId, auth.userName);
   $('#sidebar .item.user .text').text('User');
+  $('#user-modal').modal('hide');
   $('#login-layer').hide();
   $('#logout-layer').show();
 });
 
 auth.onLogoutSuccess(function(authData) {
   $('#sidebar .item.user .text').text('Login');
+  $('#user-modal').modal('hide');
   $('#login-layer').show();
   $('#logout-layer').hide();
   $('#firepad-container').replaceWith('<div id="firepad-container"></div>');
