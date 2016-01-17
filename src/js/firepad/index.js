@@ -41,4 +41,8 @@ _Firepad.prototype.getUserId = function() {
   return this.intance.firebaseAdapter_.userId_;
 }
 
+_Firepad.prototype.getId = function() {
+  return this.ref.key();
+}
+
 module.exports = _Firepad;

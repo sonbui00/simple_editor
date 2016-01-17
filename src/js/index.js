@@ -69,7 +69,7 @@ $("#video-chat").click(function(e) {
   // we have to wait until it's ready
   webrtc.on('readyToCall', function () {
     // you can name it anything
-    webrtc.joinRoom('your awesome room name');
+    webrtc.joinRoom(firepad.getId());
   });
   $(this).removeClass('play').addClass('stop');
   $(this).find('.sub_icon').removeClass('glyphicon-play-circle').addClass('glyphicon glyphicon-stop');
